@@ -23,3 +23,12 @@ test('serves the static site locally', async () => {
   assert.match(response.headers['content-type'], /text\/html/);
   assert.match(response.body.toString(), /TEYCHU/);
 });
+
+test('keeps the mobile hero and media in normal responsive flow', async () => {
+  const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /@media\(max-width:600px\)[\s\S]*?\.hero\{height:auto;min-height:100svh;display:flex;flex-direction:column\}/);
+  assert.match(css, /\.hero-proof\{position:relative;inset:auto;/);
+  assert.match(css, /\.project-card\{height:auto;aspect-ratio:4\/3;/);
+  assert.match(css, /h1\{font-size:clamp\(2\.35rem,11vw,3\.25rem\)/);
+});
