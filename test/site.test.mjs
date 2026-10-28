@@ -8,8 +8,8 @@ test('uses the transparent brand logo without color-destroying CSS filters', asy
   const logo = await readFile(new URL('../dist/assets/logo-teychu-transparent.png', import.meta.url));
 
   assert.match(html, /assets\/logo-teychu-transparent\.png/);
-  assert.match(css, /\.brand img\{filter:none!important\}/);
-  assert.match(css, /\.brand\{[^}]*background:rgba\(255,255,255,\.94\)/);
+  assert.match(css, /\.brand img\{[^}]*filter:none!important/);
+  assert.match(css, /\.brand\{[^}]*background:transparent/);
   assert.equal(logo.subarray(1, 4).toString(), 'PNG');
   assert.ok(logo.includes(Buffer.from('IHDR')), 'logo must be a valid PNG');
   assert.equal(logo[25], 6, 'logo PNG must include an alpha channel');
