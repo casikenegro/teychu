@@ -32,3 +32,12 @@ test('keeps the mobile hero and media in normal responsive flow', async () => {
   assert.match(css, /\.project-card\{height:auto;aspect-ratio:4\/3;/);
   assert.match(css, /h1\{font-size:clamp\(2\.35rem,11vw,3\.25rem\)/);
 });
+
+test('shows the updated service name and direct WhatsApp contact', async () => {
+  const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+
+  assert.match(html, /Petróleo &amp; Gas/);
+  assert.match(html, /href="https:\/\/wa\.me\/584147017200"/);
+  assert.match(html, /\+58 414 701 7200/);
+  assert.match(html, /aria-label="Contactar por WhatsApp al \+58 414 701 7200"/);
+});
