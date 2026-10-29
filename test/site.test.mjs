@@ -49,7 +49,35 @@ test('uses the new field photography without changing the brand logo', async () 
   assert.match(css, /assets\/hero-earthworks\.png/);
   assert.match(html, /assets\/project-field-testing\.png/);
   assert.match(html, /assets\/project-valve-maintenance\.png/);
-  assert.match(html, /assets\/project-lifting-operations\.png/);
+  assert.match(html, /assets\/project-lifting-complete\.png/);
   assert.match(html, /assets\/commitment-team\.png/);
   assert.match(html, /assets\/logo-teychu-transparent\.png/);
+});
+
+test('keeps collapsed capability panels hidden', async () => {
+  const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /\.service-body\[hidden\]\{display:none\}/);
+});
+
+test('keeps hero content and proof in normal flow on every viewport', async () => {
+  const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /\.hero\{height:auto;min-height:max\(760px,100svh\);display:flex;flex-direction:column\}/);
+  assert.match(css, /\.hero-proof\{position:relative;inset:auto;/);
+});
+
+test('provides an accessible hero work carousel and complete lifting image', async () => {
+  const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
+  const script = await readFile(new URL('../dist/script.js', import.meta.url), 'utf8');
+
+  assert.match(html, /aria-roledescription="carousel"/);
+  assert.match(html, /data-hero-slide/);
+  assert.match(css, /assets\/project-special-studies\.png/);
+  assert.match(css, /assets\/project-welding\.png/);
+  assert.match(html, /assets\/project-lifting-complete\.png/);
+  assert.match(css, /\.project-lifting img\{[^}]*object-position:center 68%/);
+  assert.match(script, /const heroSlides/);
+  assert.match(script, /prefers-reduced-motion/);
 });

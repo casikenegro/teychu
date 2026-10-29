@@ -19,6 +19,58 @@ mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', 
   document.body.classList.remove('menu-open');
 }));
 
+const heroSlides = [...document.querySelectorAll('[data-hero-slide]')];
+const heroDots = [...document.querySelectorAll('[data-hero-dot]')];
+const heroStatus = document.querySelector('[data-hero-status]');
+const hero = document.querySelector('.hero');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const heroLabels = ['Movimiento de tierra', 'Soldadura de tuberías', 'Estudios especiales'];
+let heroIndex = 0;
+let heroTimer;
+
+function showHeroSlide(index) {
+  heroIndex = (index + heroSlides.length) % heroSlides.length;
+  heroSlides.forEach((slide, slideIndex) => {
+    const active = slideIndex === heroIndex;
+    slide.classList.toggle('is-active', active);
+    slide.setAttribute('aria-hidden', String(!active));
+  });
+  heroDots.forEach((dot, dotIndex) => {
+    const active = dotIndex === heroIndex;
+    dot.classList.toggle('is-active', active);
+    if (active) dot.setAttribute('aria-current', 'true');
+    else dot.removeAttribute('aria-current');
+  });
+  heroStatus.textContent = `${heroLabels[heroIndex]}, diapositiva ${heroIndex + 1} de ${heroSlides.length}`;
+}
+
+function stopHeroCarousel() {
+  window.clearInterval(heroTimer);
+}
+
+function startHeroCarousel() {
+  stopHeroCarousel();
+  if (!prefersReducedMotion) heroTimer = window.setInterval(() => showHeroSlide(heroIndex + 1), 6500);
+}
+
+document.querySelector('[data-hero-prev]').addEventListener('click', () => {
+  showHeroSlide(heroIndex - 1);
+  startHeroCarousel();
+});
+document.querySelector('[data-hero-next]').addEventListener('click', () => {
+  showHeroSlide(heroIndex + 1);
+  startHeroCarousel();
+});
+heroDots.forEach(dot => dot.addEventListener('click', () => {
+  showHeroSlide(Number(dot.dataset.heroDot));
+  startHeroCarousel();
+}));
+hero.addEventListener('mouseenter', stopHeroCarousel);
+hero.addEventListener('mouseleave', startHeroCarousel);
+hero.addEventListener('focusin', stopHeroCarousel);
+hero.addEventListener('focusout', startHeroCarousel);
+startHeroCarousel();
+
 document.querySelectorAll('[data-service] button').forEach(button => {
   button.addEventListener('click', () => {
     const current = button.closest('[data-service]');

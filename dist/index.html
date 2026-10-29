@@ -36,7 +36,11 @@
 
   <main id="contenido">
     <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-media" role="region" aria-roledescription="carousel" aria-label="Trabajos realizados por TEYCHU">
+        <div class="hero-slide hero-slide-earthworks is-active" data-hero-slide role="group" aria-roledescription="diapositiva" aria-label="1 de 3: Movimiento de tierra" aria-hidden="false"></div>
+        <div class="hero-slide hero-slide-welding" data-hero-slide role="group" aria-roledescription="diapositiva" aria-label="2 de 3: Soldadura de tuberías" aria-hidden="true"></div>
+        <div class="hero-slide hero-slide-studies" data-hero-slide role="group" aria-roledescription="diapositiva" aria-label="3 de 3: Estudios especiales" aria-hidden="true"></div>
+      </div>
       <div class="hero-grid"></div>
       <div class="hero-content">
         <p class="eyebrow"><span></span> Construcción + servicios industriales</p>
@@ -51,6 +55,16 @@
         <div><strong>2002</strong><span>Año de fundación</span></div>
         <div><strong>4</strong><span>Disciplinas integradas</span></div>
         <div><strong>360°</strong><span>Del diseño al mantenimiento</span></div>
+      </div>
+      <div class="hero-carousel-controls" aria-label="Controles del carrusel">
+        <button type="button" class="hero-control" data-hero-prev aria-label="Trabajo anterior">←</button>
+        <div class="hero-dots" aria-label="Seleccionar trabajo">
+          <button type="button" class="hero-dot is-active" data-hero-dot="0" aria-label="Ver movimiento de tierra" aria-current="true"></button>
+          <button type="button" class="hero-dot" data-hero-dot="1" aria-label="Ver soldadura de tuberías"></button>
+          <button type="button" class="hero-dot" data-hero-dot="2" aria-label="Ver estudios especiales"></button>
+        </div>
+        <button type="button" class="hero-control" data-hero-next aria-label="Trabajo siguiente">→</button>
+        <span class="sr-only" aria-live="polite" data-hero-status>Movimiento de tierra, diapositiva 1 de 3</span>
       </div>
       <div class="hero-tag">Maturín · Venezuela</div>
     </section>
@@ -136,7 +150,7 @@
       <div class="project-grid">
         <figure class="project-card project-large reveal"><img src="assets/project-field-testing.png" alt="Personal técnico de TEYCHU realizando pruebas en una estación de tuberías" loading="lazy"><figcaption><span>Infraestructura energética</span><strong>Pruebas y mantenimiento en campo</strong></figcaption></figure>
         <figure class="project-card reveal"><img src="assets/project-valve-maintenance.png" alt="Técnicos trabajando sobre una válvula de una línea industrial" loading="lazy"><figcaption><span>Petróleo &amp; Gas</span><strong>Mantenimiento de válvulas</strong></figcaption></figure>
-        <figure class="project-card reveal"><img src="assets/project-lifting-operations.png" alt="Operación de izaje sobre equipos y válvulas industriales" loading="lazy"><figcaption><span>Operaciones industriales</span><strong>Maniobras especializadas</strong></figcaption></figure>
+        <figure class="project-card project-lifting reveal"><img src="assets/project-lifting-complete.png" alt="Equipo ejecutando una maniobra de izamiento con camión grúa" loading="lazy"><figcaption><span>Operaciones industriales</span><strong>Maniobras especializadas</strong></figcaption></figure>
       </div>
       <p class="source-note reveal">Imágenes provenientes del dossier corporativo TEYCHU, octubre 2026.</p>
     </section>
