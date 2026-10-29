@@ -78,7 +78,7 @@ test('provides an accessible hero work carousel and complete lifting image', asy
   assert.match(html, /aria-roledescription="carousel"/);
   assert.match(html, /data-hero-slide/);
   assert.match(css, /assets\/project-special-studies\.png/);
-  assert.match(css, /assets\/project-welding\.png/);
+  assert.match(css, /assets\/project-welding\.jpg/);
   assert.match(html, /assets\/project-lifting-complete\.png/);
   assert.match(css, /\.project-lifting img\{[^}]*object-position:center 68%/);
   assert.match(script, /const heroSlides/);

@@ -67,7 +67,7 @@
 .hero-slide{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1.04);transition:opacity .9s ease,transform 7s ease}
 .hero-slide.is-active{opacity:1;transform:scale(1)}
 .hero-slide-earthworks{background-image:url('assets/hero-earthworks.png');background-position:center 52%}
-.hero-slide-welding{background-image:url('assets/project-welding.png');background-position:center 58%}
+.hero-slide-welding{background-image:url('assets/project-welding.jpg');background-position:center 58%}
 .hero-slide-studies{background-image:url('assets/project-special-studies.png');background-position:center 60%}
 .hero-carousel-controls{position:absolute;z-index:4;right:2rem;bottom:5.5rem;display:flex;align-items:center;gap:.75rem}
 .hero-control,.hero-dot{border:1px solid rgba(255,255,255,.45);background:rgba(3,38,56,.45);color:#fff;cursor:pointer;backdrop-filter:blur(6px)}
