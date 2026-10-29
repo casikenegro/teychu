@@ -41,3 +41,15 @@ test('shows the updated service name and direct WhatsApp contact', async () => {
   assert.match(html, /\+58 414 701 7200/);
   assert.match(html, /aria-label="Contactar por WhatsApp al \+58 414 701 7200"/);
 });
+
+test('uses the new field photography without changing the brand logo', async () => {
+  const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /assets\/hero-earthworks\.png/);
+  assert.match(html, /assets\/project-field-testing\.png/);
+  assert.match(html, /assets\/project-valve-maintenance\.png/);
+  assert.match(html, /assets\/project-lifting-operations\.png/);
+  assert.match(html, /assets\/commitment-team\.png/);
+  assert.match(html, /assets\/logo-teychu-transparent\.png/);
+});
