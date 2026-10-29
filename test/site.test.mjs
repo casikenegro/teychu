@@ -38,8 +38,11 @@ test('shows the updated service name and direct WhatsApp contact', async () => {
 
   assert.match(html, /Petróleo &amp; Gas/);
   assert.match(html, /href="https:\/\/wa\.me\/584147017200"/);
+  assert.match(html, /href="https:\/\/wa\.me\/584249037609"/);
   assert.match(html, /\+58 414 701 7200/);
+  assert.match(html, /\+58 424 903 7609/);
   assert.match(html, /aria-label="Contactar por WhatsApp al \+58 414 701 7200"/);
+  assert.match(html, /aria-label="Contactar por WhatsApp al \+58 424 903 7609"/);
 });
 
 test('uses the new field photography without changing the brand logo', async () => {
