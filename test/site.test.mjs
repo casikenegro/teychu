@@ -84,3 +84,11 @@ test('provides an accessible hero work carousel and complete lifting image', asy
   assert.match(script, /const heroSlides/);
   assert.match(script, /prefers-reduced-motion/);
 });
+
+test('keeps the commitment photograph compact and focused on the team', async () => {
+  const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /@media\(max-width:900px\)[\s\S]*?\.commitment-image\{min-height:0;height:clamp\(280px,42vw,420px\)\}/);
+  assert.match(css, /@media\(max-width:600px\)[\s\S]*?\.commitment-image\{height:auto;aspect-ratio:16\/9\}/);
+  assert.match(css, /\.commitment-image img\{[^}]*object-position:center 42%/);
+});

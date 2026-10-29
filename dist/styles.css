@@ -80,3 +80,7 @@
 @media(max-width:900px){.hero-carousel-controls{right:1.25rem;top:5.5rem;bottom:auto}}
 @media(max-width:600px){.hero-carousel-controls{right:1rem;top:5rem}.hero-control{width:2rem;height:2rem}.project-lifting img{object-position:center 64%}}
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+
+.commitment-image img{object-position:center 42%}
+@media(max-width:900px){.commitment-image{min-height:0;height:clamp(280px,42vw,420px)}}
+@media(max-width:600px){.commitment-image{height:auto;aspect-ratio:16/9}}
