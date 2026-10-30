@@ -92,3 +92,31 @@ test('keeps the commitment photograph compact and focused on the team', async ()
   assert.match(css, /@media\(max-width:600px\)[\s\S]*?\.commitment-image\{height:auto;aspect-ratio:16\/9\}/);
   assert.match(css, /\.commitment-image img\{[^}]*object-position:center 42%/);
 });
+
+test('presents selected services as a responsive visual catalog', async () => {
+  const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../dist/styles.css', import.meta.url), 'utf8');
+  const orificeBefore = await readFile(new URL('../dist/assets/service-orifice-boxes-01.png', import.meta.url));
+  const orificeDuring = await readFile(new URL('../dist/assets/service-orifice-boxes-02.png', import.meta.url));
+
+  assert.match(html, /Algunos de nuestros servicios/);
+  assert.match(html, /Mantenimiento y lubricación de válvulas/);
+  assert.match(html, /Mantenimiento y reparación de cajas porta orificio/);
+  assert.match(html, /Estudios especiales/);
+  assert.match(html, /Soldadura y líneas de flujo/);
+  assert.match(html, /Actividades de izamiento de carga/);
+  assert.match(html, /assets\/project-field-testing\.png/);
+  assert.match(html, /assets\/project-station-valve\.png/);
+  assert.match(html, /assets\/service-orifice-boxes-01\.png/);
+  assert.match(html, /assets\/service-orifice-boxes-02\.png/);
+  assert.match(html, /assets\/project-special-studies\.png/);
+  assert.match(html, /assets\/service-special-studies-field\.png/);
+  assert.match(html, /assets\/project-welding\.jpg/);
+  assert.match(html, /assets\/service-flow-lines\.png/);
+  assert.match(html, /assets\/project-lifting-operations\.png/);
+  assert.match(html, /assets\/project-lifting-complete\.png/);
+  assert.match(css, /\.services-catalog/);
+  assert.match(css, /@media\(max-width:600px\)[\s\S]*?\.services-track\{[^}]*overflow-x:auto[^}]*scroll-snap-type:x mandatory/);
+  assert.ok(orificeBefore.length > 100_000);
+  assert.ok(orificeDuring.length > 100_000);
+});
