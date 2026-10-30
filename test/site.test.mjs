@@ -101,13 +101,14 @@ test('presents selected services as a responsive visual catalog', async () => {
 
   assert.match(html, /Algunos de nuestros servicios/);
   assert.match(html, /Mantenimiento y lubricación de válvulas/);
+  assert.match(html, /<article class="service-card">[\s\S]*?assets\/project-field-testing\.png[\s\S]*?Mantenimiento y lubricación de válvulas/);
   assert.match(html, /Mantenimiento y reparación de cajas porta orificio/);
   assert.match(html, /Estudios especiales/);
   assert.match(html, /Soldadura y líneas de flujo/);
   assert.match(html, /Actividades de izamiento de carga/);
   assert.match(html, /data-services-carousel/);
   assert.match(html, /assets\/project-station-valve\.png/);
-  assert.match(html, /assets\/project-valve-inspection\.png/);
+  assert.match(html, /assets\/project-field-testing\.png/);
   assert.match(html, /assets\/service-orifice-boxes-01\.png/);
   assert.match(html, /assets\/service-orifice-boxes-02\.png/);
   assert.match(html, /assets\/service-special-studies-field\.png/);
