@@ -105,18 +105,30 @@ test('presents selected services as a responsive visual catalog', async () => {
   assert.match(html, /Estudios especiales/);
   assert.match(html, /Soldadura y líneas de flujo/);
   assert.match(html, /Actividades de izamiento de carga/);
-  assert.match(html, /assets\/project-field-testing\.png/);
+  assert.match(html, /data-services-carousel/);
   assert.match(html, /assets\/project-station-valve\.png/);
+  assert.match(html, /assets\/project-valve-inspection\.png/);
   assert.match(html, /assets\/service-orifice-boxes-01\.png/);
   assert.match(html, /assets\/service-orifice-boxes-02\.png/);
-  assert.match(html, /assets\/project-special-studies\.png/);
   assert.match(html, /assets\/service-special-studies-field\.png/);
-  assert.match(html, /assets\/project-welding\.jpg/);
+  assert.match(html, /assets\/project-pipeline-manifold\.png/);
+  assert.match(html, /assets\/service-flow-lines-preparation\.png/);
   assert.match(html, /assets\/service-flow-lines\.png/);
   assert.match(html, /assets\/project-lifting-operations\.png/);
-  assert.match(html, /assets\/project-lifting-complete\.png/);
+  assert.match(html, /assets\/service-lifting-load\.png/);
   assert.match(css, /\.services-catalog/);
   assert.match(css, /@media\(max-width:600px\)[\s\S]*?\.services-track\{[^}]*overflow-x:auto[^}]*scroll-snap-type:x mandatory/);
   assert.ok(orificeBefore.length > 100_000);
   assert.ok(orificeDuring.length > 100_000);
+});
+
+test('auto-advances the mobile services carousel every five seconds and pauses while held', async () => {
+  const script = await readFile(new URL('../dist/script.js', import.meta.url), 'utf8');
+
+  assert.match(script, /const servicesTrack/);
+  assert.match(script, /setInterval\([\s\S]*?,\s*5000\)/);
+  assert.match(script, /pointerdown/);
+  assert.match(script, /pointerup/);
+  assert.match(script, /servicesHeld\s*=\s*true/);
+  assert.match(script, /prefers-reduced-motion/);
 });

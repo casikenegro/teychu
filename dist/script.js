@@ -71,6 +71,59 @@ hero.addEventListener('focusin', stopHeroCarousel);
 hero.addEventListener('focusout', startHeroCarousel);
 startHeroCarousel();
 
+const servicesTrack = document.querySelector('[data-services-carousel]');
+const serviceCards = servicesTrack ? [...servicesTrack.querySelectorAll('.service-card')] : [];
+let servicesTimer;
+let servicesHeld = false;
+
+function stopServicesCarousel() {
+  window.clearInterval(servicesTimer);
+}
+
+function advanceServicesCarousel() {
+  if (!servicesTrack || serviceCards.length < 2) return;
+  const origin = serviceCards[0].offsetLeft;
+  const current = serviceCards.reduce((closest, card, index) => {
+    const distance = Math.abs(card.offsetLeft - origin - servicesTrack.scrollLeft);
+    return distance < closest.distance ? { index, distance } : closest;
+  }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
+  const next = (current + 1) % serviceCards.length;
+  servicesTrack.scrollTo({ left: serviceCards[next].offsetLeft - origin, behavior: 'smooth' });
+}
+
+function startServicesCarousel() {
+  stopServicesCarousel();
+  if (!prefersReducedMotion && !servicesHeld && servicesTrack?.scrollWidth > servicesTrack?.clientWidth) {
+    servicesTimer = window.setInterval(() => {
+      advanceServicesCarousel();
+    }, 5000);
+  }
+}
+
+if (servicesTrack) {
+  servicesTrack.addEventListener('pointerdown', () => {
+    servicesHeld = true;
+    stopServicesCarousel();
+  });
+  window.addEventListener('pointerup', () => {
+    if (!servicesHeld) return;
+    servicesHeld = false;
+    startServicesCarousel();
+  });
+  window.addEventListener('pointercancel', () => {
+    servicesHeld = false;
+    startServicesCarousel();
+  });
+  servicesTrack.addEventListener('focusin', stopServicesCarousel);
+  servicesTrack.addEventListener('focusout', startServicesCarousel);
+  window.addEventListener('resize', startServicesCarousel);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopServicesCarousel();
+    else startServicesCarousel();
+  });
+  startServicesCarousel();
+}
+
 document.querySelectorAll('[data-service] button').forEach(button => {
   button.addEventListener('click', () => {
     const current = button.closest('[data-service]');
